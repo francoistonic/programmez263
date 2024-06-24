@@ -1,0 +1,539 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;\red89\green138\blue67;\red23\green23\blue23;\red70\green137\blue204;
+\red202\green202\blue202;\red194\green126\blue101;}
+{\*\expandedcolortbl;;\cssrgb\c41569\c60000\c33333;\cssrgb\c11765\c11765\c11765;\cssrgb\c33725\c61176\c83922;
+\cssrgb\c83137\c83137\c83137;\cssrgb\c80784\c56863\c47059;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+// rootCmd represents the base command when called without any subcommands
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+var\cf5  rootCmd = &cobra.Command\{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Use:\'a0\'a0 \cf6 "registryctl"\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Short: \cf6 "OCI/Docker Registries CLI"\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Long:\'a0 \cf6 `OCI/Docker Registries CLI allows you to manage your various OCI/Docker images registries (Docker Hub, OVHcloud Managed Private Registry, Artifactory, Google Container Registry, Harbor, Docker registries\'85)`\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+\'a0\
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+OVH_ENDPOINT\cf5 =\cf6 "ovh-eu"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+OVH_APPLICATION_KEY\cf5 =\cf6 "xxxx"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+OVH_APPLICATION_SECRET\cf5 =\cf6 "yyy"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+OVH_CONSUMER_KEY\cf5 =\cf6 "zzzz"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+OVH_CLOUD_PROJECT_SERVICE\cf5 =\cf6 "aaaaa"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\'a0\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+import\cf5  (
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "fmt"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "os"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "github.com/spf13/cobra"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "github.com/spf13/viper"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\'a0\
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+func\cf5  init() \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf2 // Read the OVHcloud credentials
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 viper.SetConfigFile(\cf6 ".env"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 err := viper.ReadInConfig()
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf4 if\cf5  err != \cf4 nil\cf5  \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 fmt.Println(\cf6 "Error: create a .env file and add your environment variables"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 panic(err)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf2 // Cobra also supports local flags, which will only run
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf2 // when this action is called directly.
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 rootCmd.Flags().BoolP(\cf6 "toggle"\cf5 , \cf6 "t"\cf5 , \cf4 false\cf5 , \cf6 "Help message for toggle"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\'a0\
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+var\cf5  ovhMprCmd = &cobra.Command\{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Use:\'a0\'a0 \cf6 "ovhMpr"\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Short: \cf6 "Manage your OVHcloud Managed Private Registries"\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Long:\'a0 \cf6 `Manage (get) your OVHcloud Managed Private Registries.`\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+\'a0\
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+package\cf5  cmd
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+import\cf5  (
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "fmt"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "net/url"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "os"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "github.com/olekukonko/tablewriter"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "github.com/ovh/go-ovh/ovh"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "github.com/spf13/cobra"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \cf6 "github.com/spf13/viper"
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f1\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+// getCmd represents the get command
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+var\cf5  getCmd = &cobra.Command\{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Use:\'a0\'a0 \cf6 "get"\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Short: \cf6 "Get your OVHcloud Managed Private Registries"\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Long:\'a0 \cf6 `Get your OVHcloud Managed Private Registries.`\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Run: \cf4 func\cf5 (cmd *cobra.Command, args []\cf4 string\cf5 ) \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \cf2 // Retrieve OVHcloud credentials needed to call API
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 OVH_ENDPOINT := viper.GetString(\cf6 "OVH_ENDPOINT"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 OVH_APPLICATION_KEY := viper.GetString(\cf6 "OVH_APPLICATION_KEY"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 OVH_APPLICATION_SECRET := viper.GetString(\cf6 "OVH_APPLICATION_SECRET"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 OVH_CONSUMER_KEY := viper.GetString(\cf6 "OVH_CONSUMER_KEY"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 OVH_CLOUD_PROJECT_SERVICE := viper.GetString(\cf6 "OVH_CLOUD_PROJECT_SERVICE"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \cf2 // Check environment variables are filled
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \cf4 if\cf5  OVH_ENDPOINT == \cf6 ""\cf5  || OVH_APPLICATION_KEY == \cf6 ""\cf5  || OVH_APPLICATION_SECRET == \cf6 ""\cf5  || OVH_CONSUMER_KEY == \cf6 ""\cf5  || OVH_CLOUD_PROJECT_SERVICE == \cf6 ""\cf5  \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 err := fmt.Errorf(\cf6 "Error: set OVHcloud environment variables in .env file: OVH_ENDPOINT, OVH_APPLICATION_KEY, OVH_APPLICATION_SECRET, OVH_CONSUMER_KEY, OVH_CLOUD_PROJECT_SERVICE"\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 panic(err)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 client, _ := ovh.NewClient(
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 OVH_ENDPOINT,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 OVH_APPLICATION_KEY,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 OVH_APPLICATION_SECRET,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 OVH_CONSUMER_KEY,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 regs := []CloudProjectContainerRegistry\{\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 endpoint := fmt.Sprintf(
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 "/cloud/project/%s/containerRegistry"\cf5 ,
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 url.PathEscape(OVH_CLOUD_PROJECT_SERVICE),
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 err := client.Get(endpoint, &regs)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \cf4 if\cf5  err != \cf4 nil\cf5  \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 fmt.Errorf(\cf6 "Error calling GET %s:\\n\\t %q"\cf5 , endpoint, err)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \cf4 var\cf5  regList = make([][]\cf4 string\cf5 , len(regs))
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \cf4 for\cf5  _, reg := \cf4 range\cf5  regs \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf2 // Add the registry in the list of registries
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 myRegistry := []\cf4 string\cf5 \{reg.Name, reg.Status, reg.Region, reg.Url, reg.Version, reg.CreatedAt\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 regList = append(regList, myRegistry)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table := tablewriter.NewWriter(os.Stdout)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetHeader([]\cf4 string\cf5 \{\cf6 "Name"\cf5 , \cf6 "Status"\cf5 , \cf6 "Region"\cf5 , \cf6 "URL"\cf5 , \cf6 "Version"\cf5 , \cf6 "Created_At"\cf5 \})
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetAutoWrapText(\cf4 false\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 \'a0\'a0\'a0table.SetAutoFormatHeaders(\cf4 true\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetHeaderAlignment(tablewriter.ALIGN_LEFT)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetAlignment(tablewriter.ALIGN_LEFT)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetCenterSeparator(\cf6 ""\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetColumnSeparator(\cf6 ""\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetRowSeparator(\cf6 ""\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetHeaderLine(\cf4 false\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetTablePadding(\cf6 "\\t"\cf5 ) \cf2 // pad with tabs
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.SetNoWhiteSpace(\cf4 true\cf5 )
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.AppendBulk(regList) \cf2 // Add Bulk Data
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0 table.Render()
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 \},
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+type\cf5  CloudProjectContainerRegistry \cf4 struct\cf5  \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 CreatedAt \cf4 string\cf5  \cf6 `json:"createdAt"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Id\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf4 string\cf5  \cf6 `json:"id"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Name\'a0\'a0\'a0\'a0\'a0 \cf4 string\cf5  \cf6 `json:"name"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 ProjectID \cf4 string\cf5  \cf6 `json:"projectID"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Region\'a0\'a0\'a0 \cf4 string\cf5  \cf6 `json:"region"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Size\'a0\'a0\'a0\'a0\'a0 \cf4 int64\cf5 \'a0 \cf6 `json:"size"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Status\'a0\'a0\'a0 \cf4 string\cf5  \cf6 `json:"status"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 UpdatedAt \cf4 string\cf5  \cf6 `json:"updatedAt"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Url\'a0\'a0\'a0\'a0\'a0\'a0 \cf4 string\cf5  \cf6 `json:"url"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 Version\'a0\'a0 \cf4 string\cf5  \cf6 `json:"version"`
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf4 \cb3 \expnd0\expndtw0\kerning0
+func\cf5  init() \{
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\'a0\'a0 ovhMprCmd.AddCommand(getCmd)
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f1\fs24 \cf5 \cb3 \expnd0\expndtw0\kerning0
+\}
+\f0\fs29\fsmilli14667 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+}
